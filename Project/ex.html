@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 검색기</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="css/book.css">
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="search">
+            <label><strong>
+                    <p>책 제목을 입력하세요. </p>
+                </strong><input type="text" name="book" id="bookName"></label>
+            <input type="submit" id="booksearch" value="검 색"></button>
+        </div>
+
+        <div class="main">
+        </div>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#booksearch").click(function () {
+                $(".book").remove();
+                $("br").remove();
+                $(".main").append("<p></p>");
+                $.ajax({
+                        method: "GET",
+                        url: "https://dapi.kakao.com/v3/search/book?target=title",
+                        data: {
+                            query: $("#bookName").val()
+                        },
+                        headers: {
+                            Authorization: "KakaoAK 29b85821bb35ca7236a088af156839cc"
+                        }
+                    })
+                    .done(function (msg) {
+                        console.log(msg.documents[0]);
+                        $(".main").append("<p class='book'><img src='" + msg.documents[0]
+                            .thumbnail + "'</img></p><br>");
+                        $(".main").append("<p class='book'>" + msg.documents[0].title +
+                            "&nbsp; | &nbsp;" + msg.documents[0].authors + "&nbsp; | &nbsp;" +
+                            msg.documents[0].publisher + "&nbsp; | &nbsp;" + msg.documents[0]
+                            .translators + "</p><br>");
+                        $(".main").append("<p class='book' id='contents'>" + msg.documents[0]
+                            .contents +
+                            "</p><br>");
+                        $(".main").append("<p class='book'>정가 : " + msg.documents[0].price +
+                            " 원</p>");
+                        $(".main").append("<p class='book'> 판매가 : " + msg.documents[0].sale_price +
+                            " 원 </p>");
+                    });
+
+            })
+
+            $('#bookName').keypress(function (event) {
+                if (event.which == 13) {
+                    $('#booksearch').click();
+                    return false;
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

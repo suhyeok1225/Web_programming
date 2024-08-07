@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-rows: 1fr 7fr 3fr ;
+            grid-template-columns: 2fr 5fr 2fr;
+            grid-template-areas:
+            "header header header"
+            "nav article aside"
+            "nav footer footer";
+            gap: 1em;
+        }
+        header{
+            grid-area: header;
+            background-color: orange;
+        }
+        nav{
+            grid-area: nav;
+            background-color: lightyellow;
+        }
+        article{
+            grid-area: article;
+            background-color: lightblue;
+        }
+        aside{
+            grid-area: aside;
+            background-color: lightpink;
+        }
+        footer{
+            grid-area: footer;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>Header</header>
+        <nav>Nav</nav>
+        <article>Article</article>
+        <aside>Ads</aside>
+        <footer>Footer</footer>
+    </div>
+</body>
+</html>

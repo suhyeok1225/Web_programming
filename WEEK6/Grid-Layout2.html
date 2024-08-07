@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #grid-container{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 10px;
+            background-color: lightskyblue;
+            padding: 10px;
+        }
+        #grid-container>div{
+            background-color: lightcyan;
+            text-align: center;
+            font-size: 30px;
+            font-family: Arial;
+            border: 2px solid lightslategray;
+        }
+        #item4{
+            grid-column: 2/4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid Lines</h1>
+    <div id="grid-container">
+        <div id="item1">1</div>
+        <div id="item2">2</div>
+        <div id="item3">3</div>
+        <div id="item4">4</div>
+        <div id="item5">5</div>
+        <div id="item6">6</div>
+        <div id="item7">7</div>
+        <div id="item8">8</div>
+    </div>
+</body>
+</html>

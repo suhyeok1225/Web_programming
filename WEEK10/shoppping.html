@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping</title>
+</head>
+<body>
+    <h1>다음 번에 마트가면 사와야 할 것(동적 쇼핑 리스트)</h1>
+    <form>
+        항목을 입력하시오: <input type="text" id="item">
+        <button type="button" onclick="additem()">항목 추가</button><br>
+    </form>
+    <ul id="list"></ul>
+    <script>
+        function additem(){
+            let item = document.getElementById("item").value;
+            let list = document.getElementById("list");
+            let li = document.createElement("li");
+            let value = document.createElement("value");
+            value.appendChild(document.createTextNode(item));
+            li.appendChild(value);
+            let button = document.createElement("button");
+            button.appendChild(document.createTextNode("항목 삭제"));  
+            button.onclick = function() {
+                list.removeChild(li); 
+            };
+            li.appendChild(button);
+            list.appendChild(li);
+            document.getElementById("item").value = "";
+        }
+    </script>
+</body>
+</html>

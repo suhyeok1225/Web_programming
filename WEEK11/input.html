@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 신청서</title>
+  <script>
+    function check_field(form){
+      //이름 검사
+      let name = form["name"].value;
+      let exp_name = /^[^\s]+$/;
+      if(!exp_name.test(name)){
+        alert("이름을 입력해주세요.");
+        form["name"].focus();
+        return false;
+      }
+      //성별 항목 검사
+      let gender = form["gender"];
+      let check = false;
+      for(let i = 0; i < gender.length; i++){
+        if(gender[i].checked){
+          check = true;
+          break;
+        }
+      }
+      if(!check){
+        alert("성별을 선택해주세요.");
+        return false;
+      }
+      //휴대폰 검사
+      let phone = form["phone"].value;
+      let exp_phone =  /^(\d{11}|\d{3}-\d{4}-\d{4})$/;
+      if(!exp_phone.test(phone)){
+          alert("휴대폰 번호 양식이 일치하지 않습니다.")
+          form["phone"].focus();
+          return false
+        } 
+      //이메일 검사  
+      let email = form["email"].value;
+      let alpha_str = email.match(/@/g);
+      let alpha_cnt = alpha_str == null ? 0 : alpha_str.length;
+      let exp_email = /^([a-zA-Z]+(\.[a-zA-Z]+)*)+@([a-zA-Z]+(\.[a-zA-Z]+)*)+$/;
+      if(!exp_email.test(email) || alpha_cnt !== 1){
+          alert("이메일 양식이 일치하지 않습니다.");
+          form["email"].focus();
+          return false;
+      }
+      //패스워드 검사
+      let password = form["password"].value;
+      let exp_password = /^[a-zA-Z0-9]{6,8}$/;    
+      if(!exp_password.test(password)){
+          alert("패스워드는 6~8글자의 영어와 숫자로만 입력해야 합니다.")
+          form["password"].focus();
+          return false;
+      }  
+      //패스워드 일치 검사
+      let password_confirm = form["password_confirm"].value;
+      if(password !== password_confirm){
+          alert("패스워드가 일치하지 않습니다.");
+          form["password_confirm"].focus();
+          return false;
+      }
+      return true;
+      }
+  </script>
+</head>
+<body>
+  <h1>회원 신청서</h1>
+  <form>
+    <table>
+      <tr>
+        <td>이름*</td>
+        <td><input type="text" name="name"></td>
+      </tr>
+      <tr>
+        <td>성별*</td>
+        <td><input type="radio" name="gender" id="man">남성 <input type="radio" name="gender" id="woman">여성</td>
+      </tr>
+      <tr>
+        <td>휴대폰 번호*</td>
+        <td><input type="text" name="phone"></td>
+      </tr>
+      <tr>
+        <td>이메일*</td>
+        <td><input type="email" name="email"></td>
+      </tr>
+      <tr>
+        <td>패스워드(6~8글자)*</td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr>
+        <td>패스워드 검증*</td>
+        <td><input type="password" name="password_confirm"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><input type="submit" value="제출" onclick="return check_field(this.form);"></td>
+        <td style="text-align: center;"><input type="reset" value="지우기"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function isArmstrong(x){
+            let ndigits = x.toString().length;
+            let sum = 0;
+            let org = x;
+            while(x > 0){
+                let r = x%10;
+                sum += r ** ndigits;
+                x = parseInt(x/10);
+            }
+            if(sum == org)
+            return true
+            else return false;
+        }
+        function find_armstrong(){
+            let begin = new Date();
+            let start = document.getElementById("from").value;
+            let end = document.getElementById("to").value;
+
+            let result = ""
+            for (let x = start; x <=end; x++) {
+                let arm = isArmstrong(x);
+                if(arm)
+                result += x + "<br>";            
+            }
+            let end2 = new Date();
+            let diff = end2.getTime() - begin.getTime();
+            result += "걸린시간:" + diff + "ms <br>"
+            document.getElementById("armstrong_number").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <br>
+      <h1>암스트롱 숫자 찾기</h1>
+      범위 :<input type="number" id="from" style="width: 3em"> ~ <input type="number" id="to" style="width: 3em"><br>
+        <br><input type="button" value="암스트롱 찾기" onclick="find_armstrong()"><br>
+        <h3>제가 찾은 암스트롱 수입니다.</h3>
+        <div id="armstrong_number"></div>
+</body>
+</html>

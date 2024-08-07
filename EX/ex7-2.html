@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{text-align: center;}
+    </style>
+</head>
+<body>
+	<script>
+		function fac(n) {
+			if (n == 1)
+				return 1;
+			else
+				return n * fac(n - 1);
+		}
+
+		function test() {
+			let num = document.forms["form1"];
+			document.getElementById("result").innerHTML = fac(num[0].value);
+		}
+	
+	</script>
+	<form id = "form1">
+        <h1>팩토리얼을 계산해봅시다!!</h1><br>
+		정수를 입력하시오: <input type = "text" id = "number"><br>
+        <br>
+		<input type = "button" name = "btn" value = "팩토리얼 계산" onclick = "test()"><br>
+        <br>
+        팩토리얼: <span id = "result"></span>
+	</form>
+</body>
+</html>

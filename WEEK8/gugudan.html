@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+
+        }
+        td{
+            text-align: center;
+        }
+        table,th,td{
+            border : solid 1px black
+        }
+        
+    </style>
+    <script>
+        let count = 100;
+        function gugudan() {
+            let result="";
+            let dan;
+            do {
+                dan = parseInt(prompt("출력하고자 하는 단수를 입력하세요.", "2~9단까지만 입력하세요:"));
+            } while (dan < 2 || dan > 9);
+            let start = dan > 2 ? dan-1 : dan;
+            let end = dan < 9 ? dan+1 : dan;
+            result += "<table border='1'>";
+            result += "<tr>";
+            for(let d = start; d <= end; d++) {
+                result += "<td colspan='3'>" + d + "</td>";
+            }
+            result += "</tr>";
+                //구구단의 각 행
+                for(let r=1; r < 10; r++) {
+                //각 단수, 예를 들어 2,3,4 단의
+                //r 행에 해당하는 값을 출력
+                    for(let d = start; d <= end; d++) {
+
+                        result += "<td>" + d + "</td>";
+                        result += "<td>" + r + "</td>";
+                        result += "<td>" + (d*r) + "</td>";
+                }
+                result += "</tr>";
+            }
+
+
+            result += "</tr></table>";
+            document.getElementById("gugu").innerHTML=result;
+
+        }
+    </script>
+</head>
+<body>
+    <h1>구구단 출력하기</h1>
+    <button onclick="gugudan()">구구단 출력</button>
+    <div id = "gugu">
+</body>
+</html>

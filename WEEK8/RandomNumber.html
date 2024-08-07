@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let value = Math.floor(Math.random()*100)+1;
+        let count = 0;
+       
+        function checkdigit() {
+            let guess = parseInt(document.getElementById("guess").value);
+            if(guess>value){
+                document.getElementById("hints").value="낮습니다."
+            }
+            else if(guess<value){
+                document.getElementById("hints").value="높습니다."
+
+            }
+            else{
+                document.getElementById("hints").value="정답니다."
+                document.getElementById("messag").innerHTML="정답입니다!!!"
+                document.getElementById("butten").disabled = true;
+                return;
+            }
+            count++
+                document.getElementById("tries").value = count;
+            }
+        
+    </script>
+</head>
+<body>
+    <h1>숫자 맞추기 게임</h1>
+    <p>
+        이 게임은 컴퓨터가 생성한 숫자를 맞추는 게임입니다. '숫자는 1부터 100사이'
+    </p>
+    <label for="guess">숫자:</label>
+    <input type="number" name="guess" id="guess">
+    <button onclick="checkdigit()" id="butten">확인</button><br>
+    <label for="tries">횟수:</label>
+    <input type="text" name="tries" id="tries" readonly><br>
+    <label for="hints">힌트:</label>
+    <input type="text" name="hints" id="hints" readonly>
+    <p id="messag"></p>
+</body>
+</html>

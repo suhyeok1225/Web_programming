@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myCanvas {
+            background-color:rgb(241, 239, 209);
+            border: 1px dotted blue;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="context.clearRect(0, 0, canvas.width, canvas.height);">
+        화면 지우기</button><br>
+
+        <canvas id="myCanvas" width="600" height="500"></canvas>
+        <img src="" id="image">
+        <script>
+            let canvas = document.getElementById("myCanvas");
+            let context = canvas.getContext("2d");
+            let start_x = 0, start_y = 0;
+            let draw_mode = false;
+            let colors = ["black","red","green","blue","pink"];
+            let color_index = 0;
+            let img = new Image();
+
+            canvas.addEventListener("mousemove", function (event) {
+                if (!draw_mode) return;
+                let x = event.offsetX;
+                let y = event.offsetY;
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.beginPath();
+                context.moveTo(start_x, start_y);
+                context.lineTo(x, y);
+                context.stroke();
+            });
+
+            canvas.addEventListener("mousedown", function (event) {
+                if(event.button == 2){
+                    color_index = (color_index + 1) % colors.length;
+                    context.strokeStyle = colors[color_index];
+                    return;
+                }
+                start_x = event.offsetX;
+                start_y = event.offsetY;
+                draw_mode = true;
+            });
+
+            canvas.addEventListener("mouseup", function (event) {
+                img.src = canvas.toDataURL();
+                document.getElementById("image").src = img.src;
+                draw_mode = false;
+            });
+
+            canvas.addEventListener("mouseout", function (event) {
+                draw_mode = false;
+            });
+
+            function saveImage() {
+                let link = document.createElement('a');
+                link.download = 'image.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            }
+
+            function addImage() {
+                let imgElement = document.getElementById('image');
+                imgElement.src = canvas.toDataURL();
+                document.body.appendChild(imgElement);
+            }
+        </script>
+        <button onclick="saveImage()">화면 저장</button>
+        <button onclick="addImage()">문서에 이미지 추가</button>
+</body>
+</html>

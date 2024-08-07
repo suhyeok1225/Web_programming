@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .button {
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+    }
+    </style>
+    <script>
+    function add() {
+        let input = document.getElementById("number").value;
+        let numbers = input.split(' ');
+        let number1 = parseFloat(numbers[0]);
+        let number2 = parseFloat(numbers[1]);
+        document.getElementById("result").value = number1 + number2;
+    }
+    function sub() {
+        let input = document.getElementById("number").value;
+        let numbers = input.split(' ');
+        let number1 = parseFloat(numbers[0]);
+        let number2 = parseFloat(numbers[1]);
+        document.getElementById("result").value = number1 - number2;
+    }
+    function mul() {
+        let input = document.getElementById("number").value;
+        let numbers = input.split(' ');
+        let number1 = parseFloat(numbers[0]);
+        let number2 = parseFloat(numbers[1]);
+        document.getElementById("result").value = number1 * number2;
+    }
+    function div() {
+        let input = document.getElementById("number").value;
+        let numbers = input.split(' ');
+        let number1 = parseFloat(numbers[0]);
+        let number2 = parseFloat(numbers[1]);
+        document.getElementById("result").value = number1 / number2;
+    }
+    </script>
+</head>
+<body>
+    숫자:<input type="text" id="number" value=""><br>
+    <input type="button" value="+" onClick="add()" class="button">
+    <input type="button" value="-" onClick="sub()" class="button">
+    <input type="button" value="*" onClick="mul()" class="button">
+    <input type="button" value="/" onClick="div()" class="button"><br>
+    연산 결과:<input type="text" id="result" value="" readonly>
+</body>
+</html>

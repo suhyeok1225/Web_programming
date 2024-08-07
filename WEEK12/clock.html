@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        let cx = canvas.width / 2;
+        let cy = canvas.height / 2;
+        let radius = canvas.width * 0.4;
+
+        function drawFace() {
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function drawHands(rad, width, height) {
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(rad) * height, cy + Math.sin(rad) * height);
+            ctx.lineWidth = width;
+            ctx.stroke();
+        }
+
+        function updateClock() {
+            let now = new Date();
+            let h = now.getHours() % 12;
+            let m = now.getMinutes();
+            let s = now.getSeconds() + now.getMilliseconds() / 1000;
+
+            let ha = Math.PI / 6 * (h + m / 60 + s / (60 * 60)) - Math.PI / 2;
+            let ma = Math.PI / 30 * (m + s / 60) - Math.PI / 2;
+            let sa = Math.PI / 30 * s - Math.PI / 2;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawFace();
+            drawHands(ha, 5, radius * 0.5);
+            drawHands(ma, 3, radius * 0.7);
+            drawHands(sa, 1, radius * 0.9);
+        }
+
+        setInterval(updateClock, 10);
+    </script>
+</body>
+</html>

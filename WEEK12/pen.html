@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>웃을까 찡그릴까</title>
+    <style>
+        #canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <button id="toggleButton">찡그리기</button>
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let context = canvas.getContext("2d");
+        let isSmiling = true;
+        let toggleButton = document.getElementById("toggleButton");
+
+        toggleButton.addEventListener("click", toggleFace);
+
+        drawFace();
+
+        function toggleFace() {
+            isSmiling = !isSmiling;
+            drawFace();
+        }
+
+        function drawFace() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.beginPath();
+            context.arc(200, 200, 150, 0, Math.PI * 2); 
+            context.stroke();
+
+            context.fillStyle = 'black';
+            context.beginPath();
+            context.ellipse(140, 150, 30, 50, 0, 0, Math.PI * 2); 
+            context.fill();
+
+            context.beginPath();
+            context.ellipse(260, 150, 30, 50, 0, 0, Math.PI * 2); 
+            context.fill();
+
+            context.beginPath();
+            if (isSmiling) {
+                context.arc(200, 220, 70, 0, Math.PI, false);
+            } else {
+                
+                context.arc(200, 300, 80, Math.PI, 0, false);
+            }
+            context.stroke();
+        }
+    </script>
+</body>
+</html>
